@@ -3,12 +3,14 @@
 
 <head>
     <title>Hot Air Balloon Schedule</title>
+    <!--Reset CSS source-->
+    <link rel="stylesheet" type="text/css" href="reset.css">
     <!--Bootstrap source-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="reset.css">
     <!--CSS source-->
-    <link rel="stylesheet" href="style.css">
-
+    <link rel="stylesheet" type="text/css" href="assets/style.css">
+    <!--Bootswatch Solar CSS source-->
+    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/solar/bootstrap.css">
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
 
@@ -25,9 +27,9 @@
         <div class="addEmployee">
             <p>Current Hot Air Balloon Schedule</p>
         </div>
-        <table class="table table-hover">
+        <table class="table table-striped table-hover">
             <thead>
-                <tr>
+                <tr class="danger">
                     <th>Hot Air Balloon Color</th>
                     <th>Destination</th>
                     <th>Frequency (minutes)</th>
