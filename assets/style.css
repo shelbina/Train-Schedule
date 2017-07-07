@@ -3,6 +3,10 @@ body {
 	background-size: cover;
 }
 
-.container {
-	background-color: 
+.transBox {
+	background-color:#073642;
+	opacity:.5;
+	font-color:#EEE;
+	padding: 10;
+	text-align:center;
 }
