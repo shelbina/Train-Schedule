@@ -11,43 +11,35 @@
   var database = firebase.database();
 
   $("#submit").on("click", function(event) {
-  event.preventDefault();
-  //take user input
-  var rideColor = $("#ride-color").val().trim();
-  var rideDestination = $("#ride-destination").val().trim();
-  var rideFirstTime = moment($("#ride-firstTime").val().trim(), "DD/MM/YY").format("X");
-  var rideFrequency = $("#ride-frequency").val().trim();
-  var rideArrival = $("#ride-arrival").val().trim();
-  var rideAway = $("#ride-away").val().trim();
-  //local object to store data
-  var newRide = {
-  Color: rideColor,
-	destination: rideDestination,
-  firstTime:rideFirstTime,
-	frequency: rideFrequency,
-	arrival: rideArrival,
-	away: rideAway,
-  };
-  //upload to database
-  database.ref().push(newRide);
-  //log to console
-  console.log(newRide.color);
-  console.log(newRide.destination);
-  console.log(newRide.firstTime);
-  console.log(newRide.frequency);
-  console.log(newRide.arrival);
-  console.log(newRide.away);
-  //alert
-  alert("Your ride has been added!")
-  //clear text input
-  $("#ride-color").val("");
-  $("#ride-destination").val("");
-  $("#ride-firstTime").val();
-  $("#ride-frequency").val();
-  $("#ride-arrival").val();
-  $("#ride-away").val();
-  
-});
+    event.preventDefault();
+    //take user input
+    var rideColor = $("#ride-color").val().trim();
+    var rideDestination = $("#ride-destination").val().trim();
+    var rideFirstTime = moment($("#ride-firstTime").val().trim(), "DD/MM/YY").format("X");
+    var rideFrequency = $("#ride-frequency").val().trim();
+    //local object to store data
+    var newRide = {
+    Color: rideColor,
+  	destination: rideDestination,
+    firstTime:rideFirstTime,
+  	frequency: rideFrequency,
+    };
+    //upload to database
+    database.ref().push(newRide);
+    //log to console
+    console.log(newRide.color);
+    console.log(newRide.destination);
+    console.log(newRide.firstTime);
+    console.log(newRide.frequency);
+
+    //alert
+    alert("Your ride has been added!")
+    //clear text input
+    $("#ride-color").val("");
+    $("#ride-destination").val("");
+    $("#ride-firstTime").val();
+    $("#ride-frequency").val();  
+  });
 
 //create event to add rides to firebase and row in html
 database.ref().on("child_added", function(childSnapshot, prevChildKey) {
@@ -57,16 +49,15 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
   var rideDestination = childSnapshot.val().destination;
   var rideFirstTime = childSnapshot.val().firstTime;
   var rideFrequency = childSnapshot.val().frequency;
-  var rideArrival = childSnapshot.val().arrival;
-  var rideAway = childSnapshot.val().away;
-  //ride info
-  console.log(newRide.color);
-  console.log(newRide.destination);
-  console.log(newRide.firstTime);
-  console.log(newRide.frequency);
-  console.log(newRide.arrival);
-  console.log(newRide.away);
   //calculate time in moment.js
+  var timeDifference= moment().duff(moment(rideFirstTime, "hh:mm A"), "m");
+  var timeRemaining = timeDifference % rideFrequency;
+  var tMinutesTill = rideFrequency - timeRemaining;
+  var nextRide = moment(.add(tMinutesTill, "minutes").format("hh:mm"));
 
+  //next train
+  console.log("Arrival Tile: " + moment(nextRide).format("hh:mm"));
 
+  $(".table").append("<tr><td>" + ride + "</tr><td>" + destination + "</td><td>" + frequency + "</td><td>" + nextRide + "</td><td>"
++ tMinutesTill + "</td><tr>");
 });
