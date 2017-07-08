@@ -53,7 +53,7 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
   var timeDifference= moment().duff(moment(rideFirstTime, "hh:mm A"), "m");
   var timeRemaining = timeDifference % rideFrequency;
   var tMinutesTill = rideFrequency - timeRemaining;
-  var nextRide = moment(.add(tMinutesTill, "minutes").format("hh:mm"));
+  var nextRide = moment().add(tMinutesTill, "minutes").format("hh:mm");
 
   //next train
   console.log("Arrival Tile: " + moment(nextRide).format("hh:mm"));
